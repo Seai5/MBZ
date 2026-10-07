@@ -129,8 +129,9 @@
             <div class="flex gap-6" id="footer-stats">
                 <!-- Footer stats injected via JS -->
             </div>
-            <div class="font-medium tracking-wide">
-                MUMBAI BLUE ZONE | SALES SCOREBOARD
+            <div class="font-medium tracking-wide flex items-center gap-3">
+                <span id="live-status" class="text-xs">● CONNECTING...</span>
+                <span>MUMBAI BLUE ZONE | SALES SCOREBOARD</span>
             </div>
         </div>
     </div>
@@ -141,8 +142,11 @@
         // =========================================================
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR1JSyVa5D4yWQGmDO07P9NdrvfP6m24ML_YlPUSxiwPqTSJI6stQ7hbJ24FxuC_GW17ZM7qsVsm_6N/pub?gid=0&single=true&output=csv';
         
-        // Refresh rate set to 10 seconds (10000 milliseconds)
-        const REFRESH_RATE = 10000; 
+        // Poll frequently. Note: Google published CSV itself can still have propagation delay.
+        const REFRESH_RATE = 5000;
+        let activeController = null;
+        let latestRequestId = 0;
+        let refreshInProgress = false;
 
         // CSV Parser that handles commas inside quotes
         function parseCSV(str) {
@@ -178,20 +182,57 @@
         }
 
         async function fetchRealTimeData() {
-            if(SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') return;
+            if (SHEET_CSV_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR1JSyVa5D4yWQGmDO07P9NdrvfP6m24ML_YlPUSxiwPqTSJI6stQ7hbJ24FxuC_GW17ZM7qsVsm_6N/pub?gid=0&single=true&output=csv') return;
+
+            // Abort the previous request so an older response can never overwrite newer data.
+            if (activeController) activeController.abort();
+            activeController = new AbortController();
+
+            const requestId = ++latestRequestId;
+            refreshInProgress = true;
+            setLiveStatus('● REFRESHING...', false);
 
             try {
-                // CACHE BUSTER ADDED HERE: ?t=123456789 prevents flickering
-                const cacheBuster = new Date().getTime();
-                const fetchUrl = SHEET_CSV_URL + (SHEET_CSV_URL.includes('?') ? '&' : '?') + 't=' + cacheBuster;
+                // Unique query params defeat browser/CDN reuse as much as the endpoint permits.
+                const separator = SHEET_CSV_URL.includes('?') ? '&' : '?';
+                const fetchUrl = `${SHEET_CSV_URL}${separator}_ts=${Date.now()}&_req=${requestId}`;
 
-                // Also force 'no-store' in headers
-                const response = await fetch(fetchUrl, { cache: 'no-store' });
+                const response = await fetch(fetchUrl, {
+                    method: 'GET',
+                    cache: 'no-store',
+                    signal: activeController.signal,
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, max-age=0',
+                        'Pragma': 'no-cache'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
                 const data = await response.text();
+
+                // Ignore any response that is no longer the newest request.
+                if (requestId !== latestRequestId) return;
+
                 processRawData(data);
+                setLiveStatus(`● LIVE • ${new Date().toLocaleTimeString()}`, true);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                if (error.name !== 'AbortError') {
+                    console.error('Error fetching data:', error);
+                    setLiveStatus('● CONNECTION ERROR', false);
+                }
+            } finally {
+                if (requestId === latestRequestId) refreshInProgress = false;
             }
+        }
+
+        function setLiveStatus(message, isLive) {
+            const el = document.getElementById('live-status');
+            if (!el) return;
+            el.textContent = message;
+            el.className = `text-xs ${isLive ? 'text-green-200' : 'text-yellow-200'}`;
         }
 
         function processRawData(csvText) {
@@ -312,8 +353,15 @@
             document.getElementById('footer-stats').innerHTML = footerHTML;
         }
 
+        // Initial load + continuous polling.
         fetchRealTimeData();
         setInterval(fetchRealTimeData, REFRESH_RATE);
+
+        // Refresh immediately when the dashboard becomes active again.
+        window.addEventListener('focus', fetchRealTimeData);
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) fetchRealTimeData();
+        });
 
     </script>
 </body>
