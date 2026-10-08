@@ -1,232 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sales Scoreboard | Mumbai Blue Zone</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {theme:{extend:{fontFamily:{sans:['Montserrat','sans-serif']},colors:{'brand-navy':'#0f2744','brand-blue':'#2278bf','brand-light':'#f4f8fb'}}}};
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Scoreboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+                    colors: {
+                        'brand-navy': '#0f2744',
+                        'brand-blue': '#2278bf',
+                        'brand-light': '#f4f8fb'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-white text-gray-800 p-4 md:p-8 min-h-screen flex justify-center font-sans">
-  <main class="max-w-6xl w-full">
-    <!-- Header: two images ABOVE Blue Zone banner on the right -->
-    <header class="flex flex-col md:flex-row justify-between items-start border-t-8 border-brand-blue pt-6 mb-8 gap-6">
-      <div class="min-w-0">
-        <p class="font-semibold tracking-widest text-xs md:text-sm text-brand-navy mb-1">THE HOUSE OF ABHINANDAN LODHA</p>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-brand-navy tracking-tight mb-2">SALES SCOREBOARD</h1>
-        <p class="font-bold text-brand-blue tracking-wide text-sm md:text-base">MUMBAI BLUE ZONE <span class="text-gray-400 font-medium md:ml-2 block sm:inline">NERAL • MUMBAI 3.0</span></p>
-      </div>
-      <div class="w-full md:w-[340px] shrink-0">
-        <div class="grid grid-cols-2 gap-3 mb-3">
-          <div class="rounded-xl overflow-hidden shadow-md bg-brand-light border border-brand-blue/20">
-            <img src="image1.jpg" alt="Blue Zone project image one" class="w-full h-28 object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div style="display:none" class="h-28 items-center justify-center text-brand-blue text-xs font-bold text-center p-3">IMAGE 1<br>image1.jpg</div>
-          </div>
-          <div class="rounded-xl overflow-hidden shadow-md bg-brand-light border border-brand-blue/20">
-            <img src="image2.jpg" alt="Blue Zone project image two" class="w-full h-28 object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div style="display:none" class="h-28 items-center justify-center text-brand-blue text-xs font-bold text-center p-3">IMAGE 2<br>image2.jpg</div>
-          </div>
+<body class="bg-white text-gray-800 p-8 min-h-screen flex justify-center">
+
+    <div class="max-w-6xl w-full">
+        <!-- Header Section -->
+        <div class="flex justify-between items-start border-t-8 border-brand-blue pt-6 mb-8">
+            <div>
+                <p class="font-semibold tracking-widest text-sm text-brand-navy mb-1">THE HOUSE OF ABHINANDAN LODHA</p>
+                <h1 class="text-5xl font-extrabold text-brand-navy tracking-tight mb-2">SALES SCOREBOARD</h1>
+                <p class="font-bold text-brand-blue tracking-wide">MUMBAI BLUE ZONE <span class="text-gray-400 font-medium ml-2">NERAL • MUMBAI 3.0</span></p>
+            </div>
+            <div class="bg-brand-blue text-white rounded-lg px-6 py-3 text-center shadow-md">
+                <h2 class="text-2xl font-extrabold tracking-wider">BLUE ZONE</h2>
+                <p class="text-[10px] tracking-widest font-semibold">TRUE BLUE WAY OF LIFE</p>
+            </div>
         </div>
-        <div class="bg-brand-blue text-white rounded-lg px-6 py-3 text-center shadow-md">
-          <h2 class="text-2xl font-extrabold tracking-wider">BLUE ZONE</h2>
-          <p class="text-[10px] tracking-widest font-semibold">TRUE BLUE WAY OF LIFE</p>
+
+        <!-- Top Summary Cards -->
+        <div class="flex gap-6 mb-10">
+            <!-- FTD Card -->
+            <div class="border border-brand-blue/30 rounded-2xl p-4 flex items-end gap-4 min-w-[200px]">
+                <div>
+                    <p class="text-brand-blue font-bold text-xs mb-1">FTD</p>
+                    <p class="text-4xl font-bold text-brand-navy" id="ftd-vd-total">0</p>
+                </div>
+                <p class="text-gray-500 font-bold text-sm mb-1">VDs</p>
+                <div class="ml-2">
+                    <p class="text-4xl font-bold text-brand-blue" id="ftd-app-total">0</p>
+                </div>
+                <p class="text-gray-500 font-bold text-sm mb-1">APPS</p>
+            </div>
+            <!-- WTD Card -->
+            <div class="border border-brand-blue/30 rounded-2xl p-4 flex items-end gap-4 min-w-[200px]">
+                <div>
+                    <p class="text-brand-blue font-bold text-xs mb-1">WTD</p>
+                    <p class="text-4xl font-bold text-brand-navy" id="wtd-vd-total">0</p>
+                </div>
+                <p class="text-gray-500 font-bold text-sm mb-1">VDs</p>
+                <div class="ml-2">
+                    <p class="text-4xl font-bold text-brand-blue" id="wtd-app-total">0</p>
+                </div>
+                <p class="text-gray-500 font-bold text-sm mb-1">APPS</p>
+            </div>
+            <!-- LTD Card -->
+            <div class="border border-brand-blue/30 rounded-2xl p-4 flex items-end gap-4 min-w-[200px]">
+                <div>
+                    <p class="text-brand-blue font-bold text-xs mb-1">LTD</p>
+                    <p class="text-4xl font-bold text-brand-navy" id="ltd-vd-total">0</p>
+                </div>
+                <p class="text-gray-500 font-bold text-sm mb-1">VDs</p>
+                <div class="ml-2">
+                    <p class="text-4xl font-bold text-brand-blue" id="ltd-app-total">0</p>
+                </div>
+                <p class="text-gray-500 font-bold text-sm mb-1">APPS</p>
+            </div>
         </div>
-      </div>
-    </header>
 
-    <!-- Summary -->
-    <section class="flex flex-wrap gap-4 md:gap-6 mb-10" aria-label="Summary metrics">
-      <div class="border border-brand-blue/30 rounded-2xl p-4 flex items-end gap-3 min-w-[200px]">
-        <div><p class="text-brand-blue font-bold text-xs mb-1">FTD</p><p class="text-4xl font-bold text-brand-navy" id="ftd-vd-total">0</p></div><p class="text-gray-500 font-bold text-sm mb-1">VDs</p>
-        <div class="ml-2"><p class="text-4xl font-bold text-brand-blue" id="ftd-app-total">0</p></div><p class="text-gray-500 font-bold text-sm mb-1">APPS</p>
-      </div>
-      <div class="border border-brand-blue/30 rounded-2xl p-4 flex items-end gap-3 min-w-[200px]">
-        <div><p class="text-brand-blue font-bold text-xs mb-1">WTD</p><p class="text-4xl font-bold text-brand-navy" id="wtd-vd-total">0</p></div><p class="text-gray-500 font-bold text-sm mb-1">VDs</p>
-        <div class="ml-2"><p class="text-4xl font-bold text-brand-blue" id="wtd-app-total">0</p></div><p class="text-gray-500 font-bold text-sm mb-1">APPS</p>
-      </div>
-      <div class="border border-brand-blue/30 rounded-2xl p-4 flex items-end gap-3 min-w-[200px]">
-        <div><p class="text-brand-blue font-bold text-xs mb-1">LTD</p><p class="text-4xl font-bold text-brand-navy" id="ltd-vd-total">0</p></div><p class="text-gray-500 font-bold text-sm mb-1">VDs</p>
-        <div class="ml-2"><p class="text-4xl font-bold text-brand-blue" id="ltd-app-total">0</p></div><p class="text-gray-500 font-bold text-sm mb-1">APPS</p>
-      </div>
-    </section>
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-3 gap-8">
+            <!-- Left: Team Performance Table -->
+            <div class="col-span-2">
+                <h3 class="font-bold text-brand-navy tracking-wide mb-3 text-sm">TEAM PERFORMANCE</h3>
+                <div class="bg-brand-navy text-white rounded-t-xl overflow-hidden">
+                    <table class="w-full text-center">
+                        <thead>
+                            <tr class="border-b border-white/20">
+                                <th class="py-3 px-4 text-left font-bold text-xl uppercase tracking-wider" rowspan="2">TEAM</th>
+                                <th class="py-2 colspan-2 border-l border-white/20 font-bold" colspan="2">FTD</th>
+                                <th class="py-2 colspan-2 border-l border-white/20 font-bold" colspan="2">WTD</th>
+                                <th class="py-2 colspan-2 border-l border-white/20 font-bold" colspan="2">LTD</th>
+                            </tr>
+                            <tr class="text-sm">
+                                <th class="py-2 border-l border-white/20">VDs</th>
+                                <th>APPS</th>
+                                <th class="py-2 border-l border-white/20">VDs</th>
+                                <th>APPS</th>
+                                <th class="py-2 border-l border-white/20">VDs</th>
+                                <th>APPS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="team-table-body" class="bg-white text-gray-800">
+                            <!-- Rows injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2 min-w-0">
-        <h3 class="font-bold text-brand-navy tracking-wide mb-3 text-sm">TEAM PERFORMANCE</h3>
-        <div class="bg-brand-navy text-white rounded-t-xl overflow-x-auto">
-          <table class="w-full text-center min-w-[560px]">
-            <thead>
-              <tr class="border-b border-white/20">
-                <th class="py-3 px-4 text-left font-bold text-xl uppercase tracking-wider" rowspan="2">TEAM</th>
-                <th class="py-2 border-l border-white/20 font-bold" colspan="2">FTD</th>
-                <th class="py-2 border-l border-white/20 font-bold" colspan="2">WTD</th>
-                <th class="py-2 border-l border-white/20 font-bold" colspan="2">LTD</th>
-              </tr>
-              <tr class="text-sm"><th class="py-2 border-l border-white/20">VDs</th><th>APPS</th><th class="py-2 border-l border-white/20">VDs</th><th>APPS</th><th class="py-2 border-l border-white/20">VDs</th><th>APPS</th></tr>
-            </thead>
-            <tbody id="team-table-body" class="bg-white text-gray-800"></tbody>
-          </table>
+            <!-- Right: LTD APPS Card -->
+            <div class="col-span-1">
+                <h3 class="font-bold text-brand-navy tracking-wide mb-3 text-sm text-right text-2xl">LTD APPS</h3>
+                <div class="bg-brand-navy rounded-3xl p-8 text-white h-[320px] flex flex-col justify-center relative">
+                    <div class="text-center mb-8">
+                        <p class="text-[10px] tracking-widest font-bold mb-1">APPLICATIONS</p>
+                        <p class="text-8xl font-bold leading-none mb-2" id="ltd-app-big">0</p>
+                        <p class="text-[10px] tracking-widest font-bold">LTD TOTAL</p>
+                    </div>
+                    
+                    <div id="progress-bars-container" class="space-y-4">
+                        <!-- Progress bars injected via JS -->
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="lg:col-span-1 min-w-0">
-        <h3 class="font-bold text-brand-navy tracking-wide mb-3 text-2xl text-right">LTD APPS</h3>
-        <div class="bg-brand-navy rounded-3xl p-8 text-white min-h-[320px] flex flex-col justify-center">
-          <div class="text-center mb-8"><p class="text-[10px] tracking-widest font-bold mb-1">APPLICATIONS</p><p class="text-7xl md:text-8xl font-bold leading-none mb-2" id="ltd-app-big">0</p><p class="text-[10px] tracking-widest font-bold">LTD TOTAL</p></div>
-          <div id="progress-bars-container" class="space-y-4"></div>
+
+        <!-- Footer -->
+        <div class="bg-brand-blue text-white rounded-lg mt-8 p-3 flex justify-between items-center font-bold text-sm px-6">
+            <div class="flex gap-6" id="footer-stats">
+                <!-- Footer stats injected via JS -->
+            </div>
+            <div class="font-medium tracking-wide flex items-center gap-3">
+                <span id="live-status" class="text-xs">● CONNECTING...</span>
+                <span>MUMBAI BLUE ZONE | SALES SCOREBOARD</span>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <footer class="bg-brand-blue text-white rounded-lg mt-8 p-3 flex flex-wrap justify-between items-center gap-3 font-bold text-sm px-6">
-      <div class="flex flex-wrap gap-x-6 gap-y-2" id="footer-stats"></div>
-      <div class="font-medium tracking-wide flex flex-wrap items-center gap-3">
-        <span id="live-status" class="text-xs" aria-live="polite">● CONNECTING...</span>
-        <span>MUMBAI BLUE ZONE | SALES SCOREBOARD</span>
-      </div>
-    </footer>
-  </main>
+    <script>
+        // =========================================================
+        // GOOGLE APPS SCRIPT REAL-TIME API
+        // After deploying Code.gs as a Web App, paste the /exec URL below.
+        // Example: https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+        // =========================================================
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2xi_Bb9URey5OECeueXrOxrCUaxdOoHcqR9OGm_BiA5eHNbYV8xDh_BLM4JWxTrmr/exec';
 
-  <script>
-    // Apps Script web app URL: paste the raw /exec URL, not Markdown link syntax.
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2xi_Bb9URey5OECeueXrOxrCUaxdOoHcqR9OGm_BiA5eHNbYV8xDh_BLM4JWxTrmr/exec';
-    const REFRESH_RATE = 3000;
-    let activeController = null;
-    let latestRequestId = 0;
-    let loading = false;
+        // Poll every 3 seconds. Apps Script reads the current sheet values
+        // directly instead of relying on Google's published-CSV cache.
+        const REFRESH_RATE = 3000;
+        let activeController = null;
+        let latestRequestId = 0;
 
-    function isDateToday(dateString) {
-      const today = new Date();
-      const d = today.getDate();
-      const m = today.toLocaleString('en-US', {month:'short'});
-      const y = today.getFullYear();
-      const date = String(dateString ?? '').trim();
-      return date === `${d}-${m}-${y}` || date === `${String(d).padStart(2,'0')}-${m}-${y}`;
-    }
+        // CSV Parser that handles commas inside quotes
+        function parseCSV(str) {
+            const arr = [];
+            let quote = false;
+            for (let row = 0, col = 0, c = 0; c < str.length; c++) {
+                let cc = str[c], nc = str[c+1];
+                arr[row] = arr[row] || [];
+                arr[row][col] = arr[row][col] || '';
+                if (cc == '"' && quote && nc == '"') { arr[row][col] += cc; ++c; continue; }
+                if (cc == '"') { quote = !quote; continue; }
+                if (cc == ',' && !quote) { ++col; continue; }
+                if (cc == '\r' && nc == '\n' && !quote) { ++row; col = 0; ++c; continue; }
+                if (cc == '\n' && !quote) { ++row; col = 0; continue; }
+                if (cc == '\r' && !quote) { ++row; col = 0; continue; }
+                arr[row][col] += cc;
+            }
+            return arr;
+        }
 
-    function setLiveStatus(message, isLive) {
-      const el = document.getElementById('live-status');
-      el.textContent = message;
-      el.className = `text-xs ${isLive ? 'text-green-200' : 'text-yellow-200'}`;
-    }
+        // Helper: Check if a date string is today's date
+        function isDateToday(dateString) {
+            const today = new Date();
+            const d = today.getDate();
+            const m = today.toLocaleString('default', { month: 'short' }); 
+            const y = today.getFullYear();
+            
+            // Format to match your sheet: e.g. "3-Oct-2026" or "03-Oct-2026"
+            const todayStr1 = `${d}-${m}-${y}`;
+            const todayStr2 = `${String(d).padStart(2, '0')}-${m}-${y}`;
+            
+            return dateString === todayStr1 || dateString === todayStr2;
+        }
 
-    async function fetchRealTimeData() {
-      if (loading) return; // Avoid overlapping requests when the API takes longer than 3 seconds.
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('PASTE_YOUR')) {
-        setLiveStatus('● ADD APPS SCRIPT URL', false); return;
-      }
-      loading = true;
-      const requestId = ++latestRequestId;
-      activeController = new AbortController();
-      setLiveStatus('● REFRESHING...', false);
-      try {
-        const separator = APPS_SCRIPT_URL.includes('?') ? '&' : '?';
-        const response = await fetch(`${APPS_SCRIPT_URL}${separator}t=${Date.now()}`, {
-          method:'GET', cache:'no-store', signal:activeController.signal
+        async function fetchRealTimeData() {
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('PASTE_YOUR')) {
+                setLiveStatus('● ADD APPS SCRIPT URL', false);
+                return;
+            }
+
+            if (activeController) activeController.abort();
+            activeController = new AbortController();
+            const requestId = ++latestRequestId;
+
+            setLiveStatus('● REFRESHING...', false);
+
+            try {
+                const separator = APPS_SCRIPT_URL.includes('?') ? '&' : '?';
+                const fetchUrl = `${APPS_SCRIPT_URL}${separator}t=${Date.now()}`;
+
+                const response = await fetch(fetchUrl, {
+                    method: 'GET',
+                    cache: 'no-store',
+                    signal: activeController.signal
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const payload = await response.json();
+                if (requestId !== latestRequestId) return;
+
+                if (!payload.ok) {
+                    throw new Error(payload.error || 'Apps Script returned an error');
+                }
+
+                processApiData(payload);
+                setLiveStatus(`● LIVE • ${new Date().toLocaleTimeString()}`, true);
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error('Real-time API error:', error);
+                    setLiveStatus('● CONNECTION ERROR', false);
+                }
+            }
+        }
+
+        function setLiveStatus(message, isLive) {
+            const el = document.getElementById('live-status');
+            if (!el) return;
+            el.textContent = message;
+            el.className = `text-xs ${isLive ? 'text-green-200' : 'text-yellow-200'}`;
+        }
+
+        function processApiData(payload) {
+            // Apps Script returns a 2D array where the first row contains headers.
+            const rows = payload.data || [];
+            if (rows.length < 2) return;
+
+            processRows(rows);
+        }
+
+        function processRawData(csvText) {
+            const rows = parseCSV(csvText);
+            processRows(rows);
+        }
+
+        function processRows(rows) {
+            if (rows.length < 2) return;
+
+            const headers = rows[0].map(h => h != null ? String(h).trim().toLowerCase() : '');
+            
+            // Find indexes based on your column headers
+            const idxDate = headers.indexOf('date');
+            const idxWeek = headers.findIndex(h => h.includes('week'));
+            const idxTeamLeader = headers.indexOf('team leader');
+            const idxStatus = headers.indexOf('status');
+            const idxRating = headers.indexOf('rating');
+
+            const teamStats = {};
+            let totals = { ftdVd: 0, ftdApp: 0, wtdVd: 0, wtdApp: 0, ltdVd: 0, ltdApp: 0 };
+
+            for (let i = 1; i < rows.length; i++) {
+                if (rows[i].length < 5 || !rows[i][idxTeamLeader]) continue;
+
+                const dateStr = String(rows[i][idxDate] ?? '').trim();
+                const weekStr = String(rows[i][idxWeek] ?? '').trim().toLowerCase();
+                // Clean up team leader name (e.g. "Salman Khan" -> "SALMAN")
+                let teamLeaderStr = String(rows[i][idxTeamLeader] ?? '').trim().toUpperCase();
+                let teamName = teamLeaderStr.split(' ')[0]; // Takes just first name for display
+
+                const statusStr = String(rows[i][idxStatus] ?? '').trim().toLowerCase();
+                const ratingStr = String(rows[i][idxRating] ?? '').trim().toLowerCase();
+
+                if (!teamStats[teamName]) {
+                    teamStats[teamName] = { ftdVd: 0, ftdApp: 0, wtdVd: 0, wtdApp: 0, ltdVd: 0, ltdApp: 0, originalName: teamLeaderStr };
+                }
+
+                const isVD = (statusStr === 'vc done');
+                const isApp = (ratingStr === 'booked');
+                const isToday = isDateToday(dateStr);
+                const isWTD = (weekStr === 'week 1' || weekStr === '1'); 
+
+                if (isVD) {
+                    teamStats[teamName].ltdVd++;
+                    totals.ltdVd++;
+                    if (isWTD) { teamStats[teamName].wtdVd++; totals.wtdVd++; }
+                    if (isToday) { teamStats[teamName].ftdVd++; totals.ftdVd++; }
+                }
+
+                if (isApp) {
+                    teamStats[teamName].ltdApp++;
+                    totals.ltdApp++;
+                    if (isWTD) { teamStats[teamName].wtdApp++; totals.wtdApp++; }
+                    if (isToday) { teamStats[teamName].ftdApp++; totals.ftdApp++; }
+                }
+            }
+
+            updateDashboardUI(teamStats, totals);
+        }
+
+        function updateDashboardUI(teamStats, totals) {
+            document.getElementById('ftd-vd-total').innerText = totals.ftdVd;
+            document.getElementById('ftd-app-total').innerText = totals.ftdApp;
+            document.getElementById('wtd-vd-total').innerText = totals.wtdVd;
+            document.getElementById('wtd-app-total').innerText = totals.wtdApp;
+            document.getElementById('ltd-vd-total').innerText = totals.ltdVd;
+            document.getElementById('ltd-app-total').innerText = totals.ltdApp;
+            document.getElementById('ltd-app-big').innerText = totals.ltdApp;
+
+            let tableHTML = `
+                <tr class="bg-gray-50 border-b border-gray-200">
+                    <td class="py-4 px-4 text-left font-bold text-xl text-brand-navy">TOTAL</td>
+                    <td class="text-xl text-gray-600">${totals.ftdVd}</td>
+                    <td class="text-xl text-gray-600">${totals.ftdApp}</td>
+                    <td class="text-xl text-gray-600">${totals.wtdVd}</td>
+                    <td class="text-xl text-gray-600">${totals.wtdApp}</td>
+                    <td class="text-xl text-gray-600">${totals.ltdVd}</td>
+                    <td class="text-xl text-gray-600">${totals.ltdApp}</td>
+                </tr>
+            `;
+
+            let progressBarsHTML = '';
+            let footerHTML = `<span>LTD VDs • ${totals.ltdVd}</span>`;
+
+            // Sort so Salman and Soef appear consistently
+            Object.keys(teamStats).sort().forEach(team => {
+                const stats = teamStats[team];
+                let isTopTeam = team === 'SALMAN' || team === 'SOEF';
+                let rowTextClass = team === 'SALMAN' ? 'text-brand-blue font-bold' : 'text-gray-700 font-bold';
+                
+                tableHTML += `
+                    <tr class="border-b border-gray-100 last:border-0 ${!isTopTeam ? 'bg-brand-light/30' : ''}">
+                        <td class="py-4 px-4 text-left text-xl ${rowTextClass} uppercase">${team}</td>
+                        <td class="text-xl text-gray-600">${stats.ftdVd}</td>
+                        <td class="text-xl text-gray-600">${stats.ftdApp}</td>
+                        <td class="text-xl text-gray-600">${stats.wtdVd}</td>
+                        <td class="text-xl text-gray-600">${stats.wtdApp}</td>
+                        <td class="text-xl ${team === 'SALMAN' ? 'text-brand-blue font-bold' : 'text-gray-600'}">${stats.ltdVd}</td>
+                        <td class="text-xl ${team === 'SALMAN' ? 'text-brand-blue font-bold' : 'text-gray-600'}">${stats.ltdApp}</td>
+                    </tr>
+                `;
+
+                let pct = totals.ltdApp > 0 ? (stats.ltdApp / totals.ltdApp) * 100 : 0;
+                progressBarsHTML += `
+                    <div>
+                        <div class="flex justify-between text-sm font-bold mb-1 uppercase tracking-wider">
+                            <span>${team}</span>
+                            <span class="text-lg">${stats.ltdApp}</span>
+                        </div>
+                        <div class="w-full bg-white/20 h-3 rounded-full overflow-hidden">
+                            <div class="bg-brand-blue h-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+
+                footerHTML += `<span>${team} • ${stats.ltdVd} VDs</span>`;
+            });
+
+            document.getElementById('team-table-body').innerHTML = tableHTML;
+            document.getElementById('progress-bars-container').innerHTML = progressBarsHTML;
+            document.getElementById('footer-stats').innerHTML = footerHTML;
+        }
+
+        // Initial load + continuous polling.
+        fetchRealTimeData();
+        setInterval(fetchRealTimeData, REFRESH_RATE);
+
+        // Refresh immediately when the dashboard becomes active again.
+        window.addEventListener('focus', fetchRealTimeData);
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) fetchRealTimeData();
         });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const payload = await response.json();
-        if (requestId !== latestRequestId) return;
-        if (!payload.ok) throw new Error(payload.error || 'Apps Script returned an error');
-        if (!Array.isArray(payload.data) || payload.data.length < 1) throw new Error('Missing sheet data');
-        processRows(payload.data);
-        setLiveStatus(`● LIVE • ${new Date().toLocaleTimeString()}`, true);
-      } catch (error) {
-        if (error.name !== 'AbortError') {
-          console.error('Real-time API error:', error);
-          setLiveStatus('● CONNECTION ERROR', false);
-        }
-      } finally { loading = false; }
-    }
 
-    function processRows(rows) {
-      const headers = rows[0].map(h => h != null ? String(h).trim().toLowerCase() : '');
-      const idxDate = headers.indexOf('date');
-      const idxWeek = headers.findIndex(h => h.includes('week'));
-      const idxTeamLeader = headers.indexOf('team leader');
-      const idxStatus = headers.indexOf('status');
-      const idxRating = headers.indexOf('rating');
-      if ([idxDate,idxWeek,idxTeamLeader,idxStatus,idxRating].some(i => i < 0)) {
-        throw new Error('Missing required sheet columns: date, week, team leader, status, rating');
-      }
-      const teamStats = Object.create(null);
-      const totals = {ftdVd:0,ftdApp:0,wtdVd:0,wtdApp:0,ltdVd:0,ltdApp:0};
-      for (let i = 1; i < rows.length; i++) {
-        const row = rows[i];
-        if (!Array.isArray(row) || !row[idxTeamLeader]) continue;
-        const dateStr = String(row[idxDate] ?? '').trim();
-        const weekStr = String(row[idxWeek] ?? '').trim().toLowerCase();
-        const fullName = String(row[idxTeamLeader] ?? '').trim().toUpperCase();
-        const teamName = fullName.split(/\s+/)[0];
-        if (!teamName) continue;
-        const statusStr = String(row[idxStatus] ?? '').trim().toLowerCase();
-        const ratingStr = String(row[idxRating] ?? '').trim().toLowerCase();
-        if (!teamStats[teamName]) teamStats[teamName] = {ftdVd:0,ftdApp:0,wtdVd:0,wtdApp:0,ltdVd:0,ltdApp:0};
-        const stats = teamStats[teamName];
-        const isVD = statusStr === 'vc done';
-        const isApp = ratingStr === 'booked';
-        const isToday = isDateToday(dateStr);
-        // Preserves the original sheet-specific definition of WTD (Week 1).
-        const isWTD = weekStr === 'week 1' || weekStr === '1';
-        if (isVD) {
-          stats.ltdVd++; totals.ltdVd++;
-          if (isWTD) {stats.wtdVd++;totals.wtdVd++;}
-          if (isToday) {stats.ftdVd++;totals.ftdVd++;}
-        }
-        if (isApp) {
-          stats.ltdApp++;totals.ltdApp++;
-          if (isWTD) {stats.wtdApp++;totals.wtdApp++;}
-          if (isToday) {stats.ftdApp++;totals.ftdApp++;}
-        }
-      }
-      updateDashboardUI(teamStats, totals);
-    }
-
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-    }
-
-    function updateDashboardUI(teamStats, totals) {
-      for (const [id, value] of Object.entries({
-        'ftd-vd-total':totals.ftdVd,'ftd-app-total':totals.ftdApp,
-        'wtd-vd-total':totals.wtdVd,'wtd-app-total':totals.wtdApp,
-        'ltd-vd-total':totals.ltdVd,'ltd-app-total':totals.ltdApp,
-        'ltd-app-big':totals.ltdApp
-      })) document.getElementById(id).textContent = value;
-
-      let tableHTML = `<tr class="bg-gray-50 border-b border-gray-200">
-        <td class="py-4 px-4 text-left font-bold text-xl text-brand-navy">TOTAL</td>
-        <td class="text-xl text-gray-600">${totals.ftdVd}</td><td class="text-xl text-gray-600">${totals.ftdApp}</td>
-        <td class="text-xl text-gray-600">${totals.wtdVd}</td><td class="text-xl text-gray-600">${totals.wtdApp}</td>
-        <td class="text-xl text-gray-600">${totals.ltdVd}</td><td class="text-xl text-gray-600">${totals.ltdApp}</td></tr>`;
-      let progressBarsHTML = '';
-      let footerHTML = `<span>LTD VDs • ${totals.ltdVd}</span>`;
-      Object.keys(teamStats).sort().forEach(team => {
-        const stats = teamStats[team];
-        const highlighted = team === 'SALMAN' || team === 'SOEF';
-        const rowTextClass = team === 'SALMAN' ? 'text-brand-blue font-bold' : 'text-gray-700 font-bold';
-        const safeTeam = escapeHTML(team);
-        tableHTML += `<tr class="border-b border-gray-100 last:border-0 ${!highlighted ? 'bg-brand-light/30' : ''}">
-          <td class="py-4 px-4 text-left text-xl ${rowTextClass} uppercase">${safeTeam}</td>
-          <td class="text-xl text-gray-600">${stats.ftdVd}</td><td class="text-xl text-gray-600">${stats.ftdApp}</td>
-          <td class="text-xl text-gray-600">${stats.wtdVd}</td><td class="text-xl text-gray-600">${stats.wtdApp}</td>
-          <td class="text-xl ${team === 'SALMAN' ? 'text-brand-blue font-bold' : 'text-gray-600'}">${stats.ltdVd}</td>
-          <td class="text-xl ${team === 'SALMAN' ? 'text-brand-blue font-bold' : 'text-gray-600'}">${stats.ltdApp}</td></tr>`;
-        const pct = totals.ltdApp > 0 ? (stats.ltdApp / totals.ltdApp) * 100 : 0;
-        progressBarsHTML += `<div><div class="flex justify-between text-sm font-bold mb-1 uppercase tracking-wider"><span>${safeTeam}</span><span class="text-lg">${stats.ltdApp}</span></div><div class="w-full bg-white/20 h-3 rounded-full overflow-hidden"><div class="bg-brand-blue h-full" style="width:${pct}%"></div></div></div>`;
-        footerHTML += `<span>${safeTeam} • ${stats.ltdVd} VDs</span>`;
-      });
-      document.getElementById('team-table-body').innerHTML = tableHTML;
-      document.getElementById('progress-bars-container').innerHTML = progressBarsHTML;
-      document.getElementById('footer-stats').innerHTML = footerHTML;
-    }
-
-    fetchRealTimeData();
-    setInterval(() => { if (!document.hidden) fetchRealTimeData(); }, REFRESH_RATE);
-    window.addEventListener('focus', fetchRealTimeData);
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) fetchRealTimeData(); });
-  </script>
+    </script>
 </body>
 </html>
