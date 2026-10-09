@@ -3,12 +3,12 @@
 
 /* Clean, large-screen table: bold values with text-only performance colors */
 .score th{font-size:17px;padding:18px 7px}
-.score th.subhead{font-size:14px}
+.score th.subhead{font-size:18px}
 .score th.team{width:170px}
 .score td{font-size:23px;padding:21px 8px;font-weight:750}
 .score td:first-child{font-size:23px;font-weight:900}
-.score td.target{background:transparent;color:var(--navy);font-weight:900;font-size:24px}
-.score td.achieved{font-weight:900;font-size:24px}
+.score td.target{background:transparent;color:var(--navy);font-weight:900;font-size:34px}
+.score td.achieved{font-weight:900;font-size:34px}
 .score td.achieved.green,.score td.achieved.amber,.score td.achieved.red{box-shadow:none}
 .score td.green{background:transparent;color:#13814a}
 .score td.amber{background:transparent;color:#a36b00}
@@ -19,7 +19,7 @@
 .score tbody tr:hover td{box-shadow:none}
 @media(max-width:850px){.score{min-width:1050px}}
 </style></head><body><main class="wrap"><header class="top"><div><div class="eyebrow">THE HOUSE OF ABHINANDAN LODHA</div><h1>SALES SCOREBOARD</h1><div class="sub">MUMBAI BLUE ZONE <span>NERAL · MUMBAI 3.0</span></div></div><div class="banner"><strong>BLUE ZONE</strong><small>TRUE BLUE WAY OF LIFE</small></div></header>
-<section class="toolbar"><div><h2>TEAM PERFORMANCE · TARGET VS ACHIEVED</h2><div class="hint">Target values are editable. Achieved values come from the live Google Sheet.</div></div><div class="buttons"><button id="edit">✎ Edit Targets</button><button class="secondary" id="export">↓ Export CSV</button></div></section>
+<section class="toolbar"><div></div><div class="buttons"><button id="edit">✎ Edit Targets</button><button class="secondary" id="export">↓ Export CSV</button></div></section>
 <div class="tablebox"><table class="score"><thead><tr><th class="team" rowspan="2">TEAM</th><th colspan="2">FTD VDs</th><th colspan="2">FTD APPS</th><th colspan="2">WTD VDs</th><th colspan="2">WTD APPS</th><th rowspan="2">LTD VDs</th><th rowspan="2">LTD APPS</th></tr><tr id="subheads"></tr></thead><tbody id="rows"></tbody></table></div>
 
 
