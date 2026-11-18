@@ -37,7 +37,29 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function target(team,key){const n=Number(targets[team]?.[key]);return Number.isFinite(n)&&n>=0?n:0}
 function totalTarget(key){return names().reduce((sum,t)=>sum+target(t,key),0)}
 function cellClass(actual,t){if(t===0)return 'neutral';const p=actual/t;return p>=1?'green':p>=.7?'amber':'red'}
-function draw(){const teams=names();const row=(name,data,isTotal)=>'<tr class="'+(isTotal?'total':'')+'"><td>'+esc(name)+'</td>'+KEYS.map(k=>{const t=TARGET_KEYS.includes(k)?(isTotal?totalTarget(k):target(name,k)):0,a=data[k]||0;return TARGET_KEYS.includes(k)?'<td class="target">'+t+'</td><td class="achieved '+cellClass(a,t)+'" title="'+(t?Math.round(a/t*100)+'% of target':'No target set')+'">'+a+'</td>':'<td class="ltd-value">'+a+'</td>'}).join('')+'</tr>';
+function draw(){
+ const teams = names();
+
+ const row = (name, data, isTotal) =>
+ '<tr class="'+(isTotal?'total':'')+'"><td>'+esc(name)+'</td>'+
+ KEYS.map(k=>{
+   const t = TARGET_KEYS.includes(k)
+     ? (isTotal ? totalTarget(k) : target(name,k))
+     : 0;
+   const a = data[k] || 0;
+
+   return TARGET_KEYS.includes(k)
+     ? '<td class="target">'+t+'</td><td class="achieved '+cellClass(a,t)+'">'+a+'</td>'
+     : '<td class="ltd-value">'+a+'</td>';
+ }).join('')+'</tr>';
+
+ // Display only TOTAL row
+ document.getElementById('rows').innerHTML =
+   row('TOTAL', totals, true);
+
+ document.getElementById('footstats').textContent =
+   'LTD VDs · '+totals.ltdVd;
+}
  document.getElementById('rows').innerHTML=row('TOTAL',totals,true)+teams.map(t=>row(t,stats[t]||empty(),false)).join('');
  document.getElementById('footstats').textContent='LTD VDs · '+totals.ltdVd+'  |  '+teams.map(t=>t+' · '+(stats[t]?.ltdVd||0)+' VDs').join('  |  ');
 }
